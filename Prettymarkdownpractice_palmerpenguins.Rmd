@@ -1,0 +1,64 @@
+---
+title: "Pretty markdown practice"
+author: "LT"
+date: "`r Sys.Date()`"
+output: 
+   prettydoc::html_pretty:
+    theme: cayman
+---
+
+# Learning how to create visualizations with Penguin Plots in Coursera    
+
+*This is a collection of notes I've taken while learning about creating visualizations in R programming language *  
+
+### Setting up my R environment by running the 'tidyverse' and 'palmerpenguins' packages.  
+
+```{r Setting up , warning=FALSE}
+library(tidyverse) ##the packages are part of the tidyverse so load that
+install.packages("palmerpenguins") ## call the palmer penguin dataset
+library(palmerpenguins) #load the library
+```
+  
+### Learning about 'ggplot()' 
+I learned:  
+* 'aes' refers to the aesthetics of the plot  
+* 'geom' refers to the geometry such as scatterplot, bars, lines etc  
+*  how to add layers to visualizations by adding the '+' at the end of each layer  
+  
+*this was pretty fun*
+```{r First ggplot, warning=FALSE}
+
+
+## ggplot() is the function, the first argument is the dataset
+## Then a + symbol adds a new layer to the plot
+## geo_point is a geometry reference, the functions uses points to create scatterplots
+##mapping=aes  aes is aesthetics the mapping() function is always paired with the aes() function
+ggplot(data = penguins) + geom_point(mapping = aes(x = flipper_length_mm, y = body_mass_g))
+
+```  
+ 
+### Learning about Facets
+This lets us see different aspects of the data in different charts  
+
+```{r learning facets, warning=FALSE}
+ggplot(data=penguins)+
+  geom_point(mapping=aes(x=flipper_length_mm, y=body_mass_g, color=species))+
+  facet_grid(~sex)
+```
+  
+
+### Creating the final Penguin Plot visualization  
+This adds color, labels, titles, subtitles, and annotations  
+
+```{r Final Penguin visualization, warning=FALSE}
+ggplot(data=penguins)+
+  geom_point(mapping=aes(x=flipper_length_mm, y=body_mass_g, color=species))+
+  labs(title="Palmer Penguins: Body mass vs. Flipper Length", subtitle="Sample of Three Penguin Species", caption= "Data Collected by Dr. Kristen Gorman and the Palmer Station, Antarctica LTER")+
+annotate("text", x=220, y=3500, label="The Gentoos are the largest",color="purple", fontface="bold",size=4.5,angle=45)
+
+```
+  
+My mind was BLOWN when I found out that I was beginning to understand this!  
+
+
+![](https://media.giphy.com/media/lXu72d4iKwqek/giphy.gif)
